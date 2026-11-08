@@ -1,0 +1,28 @@
+# Tài liệu tham khảo PDF (~95 MB), không đưa lên git
+tai-lieu-tham-khao/
+
+# Node / Expo
+node_modules/
+.expo/
+dist/
+web-build/
+*.log
+
+# Thư mục native do Expo tự sinh khi build (dự án dùng Expo managed)
+mobile/android/
+mobile/ios/
+
+# Khoá bí mật và biến môi trường
+.env
+.env.*
+!.env.example
+
+# Supabase CLI
+supabase/.branches/
+supabase/.temp/
+
+# Hệ điều hành và trình soạn thảo
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
