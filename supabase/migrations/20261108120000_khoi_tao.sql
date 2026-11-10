@@ -193,6 +193,30 @@ create policy "insert own reports" on public.content_reports
   for insert to authenticated with check (user_id = (select auth.uid()));
 
 -- ============================================================
+-- Quyền truy cập qua Data API.
+-- Dự án tạo với "Automatically expose new tables" TẮT, nên bảng mới không ai truy cập được
+-- cho đến khi cấp quyền ở đây. Chỉ cấp đúng thao tác app cần; RLS ở trên lọc tiếp từng dòng.
+-- Thêm bảng mới thì phải thêm lệnh grant trong migration mới.
+-- ============================================================
+grant select on public.languages, public.lessons, public.items to anon, authenticated;
+
+-- Hồ sơ do trigger tạo; app chỉ cập nhật hai cột này.
+grant select on public.profiles to authenticated;
+grant update (last_seen_at, app_version) on public.profiles to authenticated;
+
+grant select, insert, update on public.item_progress      to authenticated;
+grant select, insert         on public.answer_events      to authenticated;
+grant select, insert, update on public.lesson_completions to authenticated;
+
+-- Báo lỗi chỉ được gửi lên, không đọc lại: trong app gọi .insert() và KHÔNG kèm .select().
+grant insert on public.content_reports to authenticated;
+
+-- Script import dùng khoá bí mật (vai service_role): đọc và ghi bảng nội dung.
+-- Không cấp delete: mục bị bỏ khỏi Sheet chuyển sang 'retired', không xoá.
+grant select, insert, update on public.languages, public.lessons, public.items to service_role;
+grant usage, select on all sequences in schema public to service_role;
+
+-- ============================================================
 -- Bucket âm thanh: đọc công khai, chỉ service role được ghi.
 -- Đường dẫn file: {mã ngôn ngữ}/{số bài 2 chữ số}/{tên file}, ví dụ km/01/01_010.mp3
 -- ============================================================
