@@ -119,16 +119,18 @@ Cập nhật ngày 8/11/2026 theo đề xuất đã duyệt (mục 6 của `docs
 - Script import phải báo lỗi rõ ràng khi: thiếu cột, thiếu file âm thanh, trùng `(lesson_no, item_no)`, hoặc `km_segmented` ghép lại (bỏ dấu `|`) không khớp với `km`.
 
 ## 10. Trạng thái hiện tại và việc tiếp theo
-Cập nhật ngày 8/11/2026:
+Cập nhật ngày 10/11/2026:
 - **Đã xong:**
   - Bản mẫu giao diện: `mockup/` và https://claude.ai/artifact/6h4qbgLCTB64geYXKWBgxZ
   - Thiết kế trải nghiệm học: `docs/lo-trinh-hoc-tap.md`
   - Bảng màu: `docs/bang-mau.md`
   - Quy tắc câu chữ: `docs/cau-chu-giao-dien.md`
   - **Đề xuất schema và cấu trúc thư mục đã được duyệt:** `docs/de-xuat-schema-va-thu-muc.md`
-- **Đang làm:** các bước ở mục 10 của đề xuất. Bước 1 là migration SQL đầu tiên trong `supabase/migrations/`.
+  - **Repo GitHub (public):** https://github.com/dohieunghia2002/vn-eml
+  - **Bước 1 của đề xuất:** đã tạo dự án Supabase `vn-eml` (mã dự án `mnjfkzyravhgvsoniddq`, vùng Singapore) và chạy migration đầu tiên. Dự án **tắt** "Automatically expose new tables", nên mỗi bảng mới phải có lệnh `grant` trong migration. Cách chạy migration xem `supabase/README.md` (lệnh `db push` phải có `--remote`).
+- **Tiếp theo:** bước 2–3 (dựng app Expo trong `mobile/`, build APK chạy thử) và bước 4–5 (script import CSV) ở mục 10 của đề xuất. Hai nhóm bước này làm song song được.
 
 Tuần 1–2 (2/11 → 15/11/2026) cần xong:
 1. Dựng khung app Expo + Supabase, build được APK chạy thử trên máy Android thật.
-2. Schema cơ sở dữ liệu (đã duyệt, đang viết migration).
+2. Schema cơ sở dữ liệu (đã duyệt, đã chạy lên Supabase ngày 10/11/2026).
 3. Script import CSV → Supabase, chạy thử với 1 file CSV mẫu dùng placeholder.
