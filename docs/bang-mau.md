@@ -4,7 +4,7 @@ Chốt ngày 7/11/2026: dùng hướng **"Đồng và trời"**, nhưng thay mà
 
 Bản mẫu áp dụng bảng màu này: https://claude.ai/artifact/6h4qbgLCTB64geYXKWBgxZ. Ảnh chụp nằm trong thư mục `mockup/che-do-sang/` (chế độ sáng) và `mockup/che-do-toi/` (chế độ tối).
 
-Khi dựng app, khai báo các màu dưới đây **theo tên vai trò** (cột đầu tiên) trong `tailwind.config.js`, kèm biến thể `dark:` của NativeWind. Trong code không viết thẳng mã màu.
+Trong app, các màu dưới đây được khai báo **theo tên vai trò** (cột đầu tiên) trong `mobile/src/theme/palette.js`, và `tailwind.config.js` đọc từ đó (cập nhật ngày 10/11/2026). Mỗi class như `bg-primary` tự đổi màu theo chế độ sáng/tối, không cần viết thêm `dark:`. Trong code không viết thẳng mã màu. Sửa màu ở bảng này thì sửa cả `palette.js`.
 
 ## Bảng màu
 

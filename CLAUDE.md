@@ -40,22 +40,23 @@
 Ngày 7/11/2026 nhóm chốt chuyển từ PWA (Next.js) sang **React Native**, vì phần lớn người phát triển quen React Native.
 - **React Native + Expo + TypeScript** (đã chốt dùng Expo ngày 7/11/2026). Điều hướng bằng Expo Router, là mặc định của Expo.
 - Giao diện dùng **NativeWind** (viết class kiểu Tailwind), chốt ngày 7/11/2026.
-  - Màu, cỡ chữ và khoảng cách lấy từ bản mẫu trong `mockup/`, khai báo ở một chỗ duy nhất là `tailwind.config.js`.
+  - Màu, cỡ chữ và khoảng cách lấy từ bản mẫu trong `mockup/`, khai báo ở một chỗ duy nhất. Mã màu nằm trong `mobile/src/theme/palette.js`, được `tailwind.config.js` đọc vào. Màu tách ra file riêng vì chế độ tối cần đọc cùng bảng màu lúc app chạy (cập nhật ngày 10/11/2026).
   - **Bảng màu đã chốt** (7/11/2026) là "Đồng và trời" với màu cam chính `#E8590C`, có cả chế độ sáng và tối. Chi tiết từng màu theo tên vai trò nằm trong `docs/bang-mau.md`. Trong code chỉ dùng tên vai trò (ví dụ `bg-primary`), không viết thẳng mã màu.
-  - Khi dựng khung, chọn phiên bản NativeWind tương thích với bản Expo SDK đang dùng theo tài liệu chính thức, rồi ghi cố định phiên bản trong `package.json`.
+  - Khi dựng khung, chọn phiên bản NativeWind tương thích với bản Expo SDK đang dùng theo tài liệu chính thức, rồi ghi cố định phiên bản trong `package.json`. **Đã chốt ngày 10/11/2026: Expo SDK 57, NativeWind 4.2.7, Tailwind CSS 3.4.19.** Lý do và cách chạy xem `mobile/README.md`.
   - Giá trị tính lúc chạy, như độ rộng thanh tiến độ hay chiều cao cột biểu đồ, vẫn dùng prop `style`.
   - Muốn thêm thư viện giao diện khác thì hỏi trước.
 - Supabase: Postgres, Storage cho file âm thanh, Anonymous Auth để theo dõi tiến độ người dùng thử.
 - Offline: tải bài về máy, lưu chữ vào SQLite trên máy và lưu file âm thanh vào bộ nhớ của app. Tiến độ ghi trên máy rồi đồng bộ khi có mạng.
 - Dự kiến dùng các module chính chủ của Expo: `expo-sqlite` (dữ liệu offline), `expo-file-system` (file âm thanh), `expo-audio` (phát âm thanh), `expo-notifications` (nhắc ôn hẹn giờ ngay trên máy), `expo-font` (font).
 - Font: **Noto Sans Khmer đóng gói sẵn trong app**, không phụ thuộc font hệ thống. Trên Android, class `font-bold` có thể không tự chuyển sang file font đậm của một font tự đóng gói. Phải kiểm tra khi dựng khung. Cách chắc chắn là đặt mỗi độ đậm một tên font riêng và khai báo thành class riêng trong `tailwind.config.js`.
+  - Đã làm theo cách này ngày 10/11/2026: `font-ui`, `font-ui-semibold`, `font-ui-bold`, `font-ui-extrabold` (Be Vietnam Pro, font giao diện của bản mẫu) và `font-target`, `font-target-bold` (Noto Sans Khmer). Không dùng `font-bold`, `font-semibold`. Nguồn và giấy phép font: `mobile/assets/fonts/README.md`.
 - Build bằng EAS Build ra file APK hoặc AAB cho Android.
 - Tên gói Android: **`com.vneml.app`** (chốt ngày 8/11/2026). Tên gói không đổi được sau khi app đã lên CH Play.
 - **Kinh phí hiện là 0 (8/11/2026).** Mọi dịch vụ dùng gói miễn phí: GitHub, Supabase, Expo/EAS. **MVP và đợt dùng thử phát hành bằng file APK qua đường link của EAS** (phát hành nội bộ), chưa lên CH Play.
   - Supabase gói miễn phí tạm dừng dự án nếu khoảng 1 tuần không có hoạt động.
   - EAS gói miễn phí giới hạn số lần build mỗi tháng, nên đừng build liên tục.
 - **Khi có kinh phí để lên CH Play** (phí 25 USD, trả một lần): theo quy định hiện tại của Google Play, tài khoản nhà phát triển cá nhân mới phải chạy thử kín với ít nhất 12 người trong 14 ngày liên tục trước khi được phát hành công khai. Cần kiểm tra lại quy định khi đăng ký.
-- **Thư viện đã duyệt ngày 8/11/2026:** danh sách ở mục 8 của `docs/de-xuat-schema-va-thu-muc.md`. Thư viện ngoài danh sách đó vẫn phải hỏi trước.
+- **Thư viện đã duyệt ngày 8/11/2026:** danh sách ở mục 8 của `docs/de-xuat-schema-va-thu-muc.md`. Thư viện ngoài danh sách đó vẫn phải hỏi trước. Ngày 11/11/2026 duyệt thêm `react-native-svg` (biểu tượng, vòng tiến độ, biểu đồ Sổ từ).
 - Thống kê cho hồ sơ thi làm bằng SQL view trên Supabase, vì không còn web app để làm trang admin.
 - Script import CSV → Supabase viết bằng Node.js + TypeScript, chạy trên máy tính, tách riêng khỏi app.
 - Hỏi trước khi thêm thư viện mới. Ưu tiên giải pháp đơn giản.
@@ -64,6 +65,7 @@ Ngày 7/11/2026 nhóm chốt chuyển từ PWA (Next.js) sang **React Native**, 
 - Chữ Khmer là hệ chữ phức tạp, có phụ âm chân (coeng) xếp chồng. **Không cắt chuỗi theo code point.**
   - Trong app, để `<Text numberOfLines>` tự cắt khi hiển thị.
   - Nếu buộc phải cắt chuỗi, cắt theo grapheme cluster. Script Node dùng được `Intl.Segmenter` với granularity `grapheme`. Hermes, engine JavaScript của React Native, có thể chưa hỗ trợ `Intl.Segmenter`, nên phải kiểm tra trước và hỏi trước khi thêm thư viện thay thế.
+  - **Đã kiểm tra ngày 11/11/2026 trên máy Android thật: Hermes không có `Intl.Segmenter`.** Hiện app không có chỗ nào cần cắt chuỗi (sắp xếp câu dùng `km_segmented`, hiển thị dùng `numberOfLines`), nên chưa thêm thư viện thay thế.
 - Tiếng Khmer **không có dấu cách giữa các từ**. Không tự tách từ bằng thuật toán. Đội nội dung cung cấp sẵn câu đã tách từ, ngăn cách bằng `|`, trong cột `km_segmented`.
 
 ## 7. Phạm vi MVP
@@ -128,9 +130,16 @@ Cập nhật ngày 10/11/2026:
   - **Đề xuất schema và cấu trúc thư mục đã được duyệt:** `docs/de-xuat-schema-va-thu-muc.md`
   - **Repo GitHub (public):** https://github.com/dohieunghia2002/vn-eml
   - **Bước 1 của đề xuất:** đã tạo dự án Supabase `vn-eml` (mã dự án `mnjfkzyravhgvsoniddq`, vùng Singapore) và chạy migration đầu tiên. Dự án **tắt** "Automatically expose new tables", nên mỗi bảng mới phải có lệnh `grant` trong migration. Cách chạy migration xem `supabase/README.md` (lệnh `db push` phải có `--remote`).
-- **Tiếp theo:** bước 2–3 (dựng app Expo trong `mobile/`, build APK chạy thử) và bước 4–5 (script import CSV) ở mục 10 của đề xuất. Hai nhóm bước này làm song song được.
+  - **Bước 2 của đề xuất:** đã dựng app Expo trong `mobile/` (Expo Router, NativeWind, bảng màu sáng/tối, font). Đã chạy trên máy Android thật bằng Expo Go ngày 11/11/2026.
+  - **Giao diện (11/11/2026):** đã dựng đủ các màn hình của bản mẫu, bấm thử được từ đầu đến cuối: màn hình chào, tải bài, trang chính, thẻ làm quen và 5 dạng bài tập, tổng kết, Sổ từ, Thêm, ghi công, hướng dẫn, giới thiệu. **App đang chạy bằng dữ liệu mẫu và trạng thái mẫu trong bộ nhớ** (`mobile/src/demo/`): tắt app là mất tiến độ, âm thanh chỉ giả lập, cỡ chữ "Rất lớn" chưa có tác dụng. Đã kiểm tra kiểu TypeScript và đóng gói thử cho Android, **chưa chạy các màn hình mới trên máy thật**.
+- **Tiếp theo:**
+  - Chạy thử các màn hình mới trên máy thật, sửa chỗ lệch so với bản mẫu.
+  - Bước 3: build APK bằng EAS. Cần đội nội dung gửi một câu tiếng Khmer thật có phụ âm chân để thay placeholder trong `mobile/src/dev/fontTestText.ts`.
+  - Bước 4–5: script import CSV. Làm song song được.
+  - Bước 6: tải bài về SQLite, rồi thay `mobile/src/demo/` bằng dữ liệu và tiến độ thật.
+  - Viết kiểm thử tự động cho `mobile/src/learning/` (jest-expo, đã duyệt).
 
 Tuần 1–2 (2/11 → 15/11/2026) cần xong:
-1. Dựng khung app Expo + Supabase, build được APK chạy thử trên máy Android thật.
+1. Dựng khung app Expo + Supabase, build được APK chạy thử trên máy Android thật (khung app xong ngày 10/11/2026, đã chạy bằng Expo Go ngày 11/11/2026, còn build APK).
 2. Schema cơ sở dữ liệu (đã duyệt, đã chạy lên Supabase ngày 10/11/2026).
 3. Script import CSV → Supabase, chạy thử với 1 file CSV mẫu dùng placeholder.

@@ -334,6 +334,7 @@ Theo CLAUDE.md, thêm thư viện nào cũng phải hỏi trước. Danh sách �
 | `expo-file-system`, `expo-audio`, `expo-font`, `expo-notifications` | Âm thanh, font, nhắc ôn | Module chính chủ của Expo |
 | `expo-network` | Biết máy có mạng hay không, để quyết định lúc đồng bộ | Module chính chủ của Expo |
 | `expo-crypto` | Sinh `id` cho sự kiện ngay trên máy | Module chính chủ của Expo |
+| `react-native-svg` | Vẽ biểu tượng, vòng tiến độ "Mục tiêu hôm nay", biểu đồ Sổ từ | Duyệt thêm ngày 11/11/2026. Expo hỗ trợ chính thức, có sẵn trong Expo Go |
 
 **Script import:**
 
